@@ -1,20 +1,14 @@
 
 
 #Input
-print("Hello")
-name = input("What is your name: ")
-
-random = str(input("What is your favorite sport? "))
+print("Hello!")
+name = input("What is your name? ")
 
 #Process
-if random == 'rock climbing':
-	finalOutput = "That's great " + name + ". I hope to see you soon!"
-else:
-	finalOutput = "Oh koo"
 
 
 #Output
 
-print(finalOutput)
+print("Hello " + name + ". I hope you're doing well")
 
 print("PROGRAM END")

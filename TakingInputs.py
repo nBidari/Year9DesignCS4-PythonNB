@@ -3,22 +3,18 @@
 #Input
 print("Hello")
 name = input("What is your name: ")
-print("I will guess a number")
-random = float(input("Enter a number between 1 and 2: "))
 
-
+random = str(input("What is your favorite sport? "))
 
 #Process
-if random > 2: 
-	nameOne == name + " isn't such a good person."
-
+if random == 'rock climbing':
+	finalOutput = "That's great " + name + ". I hope to see you soon!"
 else:
-	nameOne == name + "is a good person."
+	finalOutput = "Oh koo"
 
 
 #Output
 
-print(nameOne)
-
+print(finalOutput)
 
 print("PROGRAM END")

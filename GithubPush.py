@@ -1,30 +1,17 @@
-#Created by Justin Lo       Sept 14 2018
-#Modified by Nima Bidari    Sept 14 2018
+#Created by Justin Lo Sept 14 2018
+#Modified by Nima Bidari Sept 17 2018
 
 import os
 
-os.system("cd desktop")
-os.system("cd GitRepoYear9")
-os.system("cd Year9DesignCS4-PythonNB")
+
+text=input('What is your comment for commit: ')
 
 os.system("git status")
 
-continuePushing = input("Are you sure you want to continue? Y/N ")
+os.system("git add 	.")
 
-str(continuePushing)
+sentence = str('git commit -m "{0}"'.format(text))
+os.system(sentence)
 
-bool continuePushingBool
-
-if continuePushing = "Y" :
-	continuePushingBool = true
-else if continuePushing = "N"
-	continuePushingBool = false
-
-
-if continuePushingBool = true :
-	os.system("git add .")
-
-	msg = input("What is your commit msg? ")
-
-
+os.system("git push")
 

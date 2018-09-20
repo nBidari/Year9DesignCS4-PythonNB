@@ -10,11 +10,14 @@ playerTwoScore = 0
 #
 #Whats more dense, fat or muscle?
 #Is it thicc or thiccc
-#What is the correct way to 
+#What is the correct way to spell Vanaan's last name? (Marugathas)
+#Trump or Francesco for 2022
+#Is Nima 6 feet or 
 #Age Group 2 (13-69)
 #
 #Motahdi or Densdedt?
-#
+#If you are canoeing up the empire State Building, how many flat tires do you have? (Answer = Yes)
+#When did WWIII start? (October 19th, 1984)
 #Age Group 3 (70 - Infinity)
 #
 #

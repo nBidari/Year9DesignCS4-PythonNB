@@ -12,7 +12,7 @@ name = "Paul"
 
 print(name)
 
-sentence = name + "is cool!"
+sentence = name + " is cool!"
 
 print(sentence)
 print(sentence + "!")

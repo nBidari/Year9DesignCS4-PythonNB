@@ -5,19 +5,25 @@ playerTwoScore = 0
 
 #Questions
 #Whats your name
-#Whats your age
-#Age Group 1 (0-12)
-#
 #Whats more dense, fat or muscle?
 #Is it thicc or thiccc
 #What is the correct way to spell Vanaan's last name? (Marugathas)
-#Trump or Francesco for 2022
-#Is Nima 6 feet or 
-#Age Group 2 (13-69)
-#
+#Trump or Francesco for 2020
+#Is Nima 6 feet or 6 1
 #Motahdi or Densdedt?
 #If you are canoeing up the empire State Building, how many flat tires do you have? (Answer = Yes)
-#When did WWIII start? (October 19th, 1984)
-#Age Group 3 (70 - Infinity)
-#
-#
+#When did WWIII start? (October 20th, 1984)
+
+namePlayerOne = input("Player One's Name: ")
+namePlayerTwo = input("Player Two's Name: ")
+
+print("Please be case perfect!")
+
+questionOne = input("Whats more dense, fat or muscle? ")
+questionTwo = input("Is it thicc or thiccc? ")
+questionThree = input("What is the correct way to spell Vanaan's last name? ")
+questionFour = input("Trump or Francesco for 2020? ")
+questionFive = input("Is Nima 6 feet or 6 feet one inch? ")
+questionSix = input("Mohtadi or Densdedt? ")
+questionSeven = input("If you are canoeing up the Empire State Building, how many flat tires do you get? ")
+questionEight = input("When did WWIII start? ")

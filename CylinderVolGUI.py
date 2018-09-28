@@ -31,6 +31,7 @@ labr = tk.Label(root, text="radius")
 labr.pack()
 
 entr = tk.Entry(root)
+labr.config(background = "gray")
 entr.pack()
 
 labh = tk.Label(root, text="height")

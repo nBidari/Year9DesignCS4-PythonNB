@@ -18,7 +18,23 @@
 
 print("*****************************************************")
 
-word = input("Please input a word larger than 5 letters: ")
+word = " "
+
+
+while (len(word) < 6 or word.isalpha == False):
+	#loop block
+	word = input("Please input a word larger than 5 letters: ")
+
+
+	if (len(word) < 6):
+		print("I SAID LARGER THAN 5 LETTERS!!!")
+
+	if (word.isalpha() == True):
+		print("I SAID A REAL WORD!!!")
+
+
+	#check condition at bottom of loop block
+	#if true loop starts again
+
 
 print(word + " is a seriously long word!")
-

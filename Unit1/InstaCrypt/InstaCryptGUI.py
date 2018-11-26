@@ -2,7 +2,18 @@ import tkinter as tk
 
 class Instacrypt:
 
+
 	def __init__(self):
+
+		#Variables for Data:
+
+
+
+
+
+
+
+
 		self.root = tk.Tk()
 		self.root.title("InstaCrypt")
 		self.root.configure(background = "#DADFDF")
@@ -99,12 +110,12 @@ class Instacrypt:
 		#Import Export Buttons
 
 		self.importbtn = tk.Button(self.root, text = "Import to Text File", 
-											height = 2, width = 40)
+											height = 2, width = 40, command = self.importfnc)
 		self.importbtn.config(highlightbackground = "#232423")
 		self.importbtn.grid(row = 4, column = 6, padx = 12)
 
 		self.exportbtn = tk.Button(self.root, text = "Export From Text File", 
-											height = 2, width = 40)
+											height = 2, width = 40, command = self.exportfnc)
 		self.exportbtn.config(highlightbackground = "#232423")
 		self.exportbtn.grid(row = 5, column = 6)
 
@@ -123,6 +134,16 @@ class Instacrypt:
 
 
 		self.root.mainloop()
+
+	def importfnc(self):
+		print(self.importbtn["text"])
+
+	def exportfnc(self):
+		print(self.exportbtn["text"])
+
+
+
+
 
 
 

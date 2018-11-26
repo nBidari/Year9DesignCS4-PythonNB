@@ -1,21 +1,28 @@
-def encryptionMode(encryptionAlgorithm):
-	modeInput = input("What would you like to do? ")
+class Instacrypt:
+	def __init__(self):
 
-	return modeInput
+		self.finalOutput = " "
 
-def shiftSelect(shift):
-	shiftInput = input("What is your shift? ")
+		self.action = input("Are you encoding? Y/N: ")
+		self.mode = input("What encryption algorithm would you like? ")
+		self.shift = int(input("What is your shift? "))
 
-	#I want it to restart from the top of this function is these conditions are made.
-	#If this condition is not met, then it returns the shift.
-	#I will use this in the function that is specific for each algorithm.
-	if int(shiftInput) > 25 or int(shiftInput) < -25:
-		print("Try Again")
+		self.inputVar = input("What is your phrase?")
 
-	#One other question, should I use a different class for each algorithm?
-	#So depending on the requested algorithm and the requested shift(if appliable)
-	#Then it would run a specific class etc. (Is that the best use of the class?)
+		print(self.finalOutput)
+
+		
 
 
+	def encryptAscii(self): 
+
+		for i in range(len(self.inputVar)-1):
+			self.finalOutput += ord(self.inputVar) + " "
+
+		print("test")
+
+
+
+mainPage = Instacrypt()
 
 

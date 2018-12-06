@@ -207,7 +207,15 @@ class Instacrypt:
 		############################
 
 	def binaryEncode(self):
-		print("Binary Encode")
+
+		inputStr = self.inputEnt.get("1.0", tk.END)
+
+		self.outputStr.join(format(ord(x), 'b') for x in inputStr)
+
+		print(self.outputStr)
+
+
+
 
 	def rotiEncode(self):
 		inputStr = self.inputEnt.get("1.0", tk.END)

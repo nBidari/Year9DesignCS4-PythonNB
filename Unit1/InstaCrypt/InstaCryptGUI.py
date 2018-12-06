@@ -32,8 +32,7 @@ class Instacrypt:
 
 
 		self.languageList = ["Language Select","English", "Espanol","Farsi", "Francais"]
-		self.algorithmList = ["Encryption Algorithm", "ASCII", "Binary", "ROTI",
-										 "ASCII-Binary", "Binary Inversion"]
+		self.algorithmList = ["Encryption Algorithm", "ASCII", "Binary", "ROTI", "Binary Inversion"]
 
 		########################################################################
 
@@ -93,7 +92,7 @@ class Instacrypt:
 
 		self.outputEnt = tk.Text(self.root, background = "black", foreground = "lime",
 									height = 10, width = 65)
-		self.outputEnt.config(state = "disabled", highlightbackground = "#074C0A")
+		self.outputEnt.config(highlightbackground = "#074C0A")
 		self.outputEnt.grid(row = 5, column = 0, columnspan = 4, rowspan = 3, sticky = 'W', padx = 5, pady = 5)
 
 		#########################################################################
@@ -194,15 +193,12 @@ class Instacrypt:
 				self.outputStr += str(ord(inputStr[i]))
 				self.outputStr += " "
 		
-		self.outputEnt.config(state = 'normal')
 
 		self.outputEnt.delete("1.0", tk.END)
 		self.outputEnt.update()
 
 		self.outputEnt.insert(tk.INSERT, self.outputStr[0:len(self.outputStr)-3])
-		self.outputEnt.config(state = 'disabled')
 
-		self.outputStr = ""
 
 		############################
 
@@ -210,12 +206,15 @@ class Instacrypt:
 
 		inputStr = self.inputEnt.get("1.0", tk.END)
 
-		self.outputStr.join(format(ord(x), 'b') for x in inputStr)
+		str = ' '.join(format(ord(x), 'b') for x in inputStr)
+		
 
-		print(self.outputStr)
+		self.outputEnt.delete("1.0", tk.END)
+		self.outputEnt.update()
 
+		self.outputEnt.insert(tk.INSERT, str[0:len(str) - 5])
 
-
+		##############################
 
 	def rotiEncode(self):
 		inputStr = self.inputEnt.get("1.0", tk.END)
@@ -226,23 +225,28 @@ class Instacrypt:
 			self.outputStr += chr(int(ord(inputStr[x]) + shift))
 
 
-		self.outputEnt.config(state = 'normal')
 
 		self.outputEnt.delete("1.0", tk.END)
 		self.outputEnt.update()
 
 		self.outputEnt.insert(tk.INSERT, self.outputStr)
 
-		self.outputEnt.config(state = 'disabled')
-
-		self.outputStr = ""
 
 
-	def asciiBinaryEncode(self):
-		print("ASCII-Binary")
+		#################################
 
 	def binaryInversionEncode(self):
-		print("Binary Inversion")
+
+		inputStr = self.inputEnt.get("1.0", tk.END)
+
+		str = ' '.join(format(ord(x), 'b') for x in inputStr)
+		self.outputStr = str[::-1]
+
+
+		self.outputEnt.delete("1.0", tk.END)
+		self.outputEnt.update()
+
+		self.outputEnt.insert(tk.INSERT, self.outputStr[5:len(self.outputStr)])
 
 	#################################################################################
 
@@ -288,18 +292,27 @@ class Instacrypt:
 			self.outputStr += chr(int(inputList[x]))
 			print("test 2")
 
-		self.outputEnt.config(state = 'normal')
 
 		self.outputEnt.delete("1.0", tk.END)
 		self.outputEnt.update()
 
 		self.outputEnt.insert(tk.INSERT, self.outputStr)
-		self.outputEnt.config(state = 'disabled')
 
-		self.outputStr = ""
+
+		#########################
 
 	def binaryDecode(self):
-		print("Binary Decode")
+		
+		inputStr = self.inputEnt.get("1.0", tk.END)
+
+		self.outputStr = inputStr.decode('utf-8')
+
+		self.outputEnt.delete("1.0", tk.END)
+		self.outputEnt.update()
+
+		self.outputEnt.insert(tk.INSERT, self.outputStr)
+
+		#########################
 
 	def rotiDecode(self):
 		inputStr = self.inputEnt.get("1.0", tk.END)
@@ -310,20 +323,14 @@ class Instacrypt:
 
 
 
-		self.outputEnt.config(state = 'normal')
 
 		self.outputEnt.delete("1.0", tk.END)
 		self.outputEnt.update()
 
 		self.outputEnt.insert(tk.INSERT, self.outputStr)
 
-		self.outputEnt.config(state = 'disabled')
+		#############################
 
-		self.outputStr = ""
-
-
-	def asciiBinaryDecode(self):
-		print("Ascii-Binary Decode")
 
 	def binaryInversionDecode(self):
 		print("binary inversion decode")
@@ -335,39 +342,40 @@ class Instacrypt:
 
 	def submitfnc(self):
 
-		if self.actionRadioVar.get() == 1:
+		try:
+			if self.actionRadioVar.get() == 1:
 
-			if self.algorithmVar.get() == "ASCII":
-				self.asciiEncode()
+				if self.algorithmVar.get() == "ASCII":
+					self.asciiEncode()
 
-			elif self.algorithmVar.get() == "Binary":
-				self.binaryEncode()
+				elif self.algorithmVar.get() == "Binary":
+					self.binaryEncode()
 
-			elif self.algorithmVar.get() == "ROTI":
-				self.rotiEncode()
+				elif self.algorithmVar.get() == "ROTI":
+					self.rotiEncode()
 
-			elif self.algorithmVar.get() == "ASCII-Binary":
-				self.asciiBinaryEncode()
+				elif self.algorithmVar.get() == "Binary Inversion":
+					self.binaryInversionEncode()
+			else:
 
-			elif self.algorithmVar.get() == "Binary Inversion":
-				self.binaryInversionEncode()
-		else:
+				if self.algorithmVar.get() == "ASCII":
+					self.asciiDecode()
 
-			if self.algorithmVar.get() == "ASCII":
-				self.asciiDecode()
+				elif self.algorithmVar.get() == "Binary":
+					self.binaryDecode()
 
-			elif self.algorithmVar.get() == "Binary":
-				self.binaryDecode()
+				elif self.algorithmVar.get() == "ROTI":
+					self.rotiDecode()
 
-			elif self.algorithmVar.get() == "ROTI":
-				self.rotiDecode()
+				elif self.algorithmVar.get() == "Binary Inversion":
+					self.binaryInversionDecode()
 
-			elif self.algorithmVar.get() == "ASCII-Binary":
-				self.asciiBinaryDecode()
+		except ValueError:
 
-			elif self.algorithmVar.get() == "Binary Inversion":
-				self.binaryInversionDecode()
+			self.outputEnt.delete("1.0", tk.END)
+			self.outputEnt.update()
 
+			self.outputEnt.insert(tk.INSERT, "INVALID")
 
 		###### Language Change #####
 
@@ -403,9 +411,6 @@ class Instacrypt:
 
 		
 		self.outputStr = ""
-
-
-		# print(self.shiftSpin.get())
 
 	
 

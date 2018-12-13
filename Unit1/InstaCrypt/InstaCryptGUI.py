@@ -1,9 +1,14 @@
+# Created by Nima Bidari December 6 2018
+
 import tkinter as tk
+
 
 class Instacrypt:
 
 
 	def __init__(self):
+
+		self.outputStr = ""
 
 		####### Language VARS ########
 
@@ -11,8 +16,22 @@ class Instacrypt:
 		self.frenchTrans  = ["Action", "Encoder", "Décoder", "Décalage", "Submitter","Importer Dans Un Fichier Texte", "Exporter Dans Un Fichier Texte"]
 		self.spanishTrans = ["Acción", "Codificar", "Descodificar", "El Cambio", "Enviar", "Importar Desde Archivo de Texto", "Exportar a Archivo de Texto"]
 
+		####### DESC VARS #############
+
+		self.adList  = ["Small description of the algorithms...",
+						""
+
+		]
+		
+		self.cdList  = ["Small description of code behind it, as well as the restrictions...",
+						""
+
+		]
+
 		######## IMPORT/EXPORT FILE SETUP ##########
+		
 		self.fileName = ""
+
 
 		######################## ROOT ############################
 	
@@ -31,7 +50,7 @@ class Instacrypt:
 		self.actionRadioVar.set(1)
 
 
-		self.languageList = ["Language Select","English", "Espanol","Farsi", "Francais"]
+		self.languageList = ["Language Select","English", "Espanol", "Francais"]
 		self.algorithmList = ["Encryption Algorithm", "ASCII", "Binary", "ROTI", "Binary Inversion"]
 
 		########################################################################
@@ -43,7 +62,6 @@ class Instacrypt:
 		self.actionFrame.config(background = "#DADFDF", relief = "sunken")
 		self.actionFrame.grid(row = 0, column = 0, rowspan = 2,sticky = 'W', padx = 15, pady = 5)
 
-
 		self.encodeRadio = tk.Radiobutton(self.actionFrame, text = self.englishTrans[1], variable = self.actionRadioVar, value = 1)
 		self.encodeRadio.config(background = "#DADFDF")
 		self.encodeRadio.grid(sticky = "W")
@@ -51,8 +69,6 @@ class Instacrypt:
 		self.decodeRadio = tk.Radiobutton(self.actionFrame, text = self.englishTrans[2], variable = self.actionRadioVar, value = 2)
 		self.decodeRadio.config(background = "#DADFDF")
 		self.decodeRadio.grid(row = 1, sticky = "W")
-
-		#######################################################################
 
 
 		############## #Dropdown's (Language and Encryption Alogrithm) ############
@@ -67,8 +83,6 @@ class Instacrypt:
 		self.algorithmdrop.config(background = "#DADFDF")
 		self.algorithmdrop.grid(row = 1, column = 2, sticky = 'NSEW')
 
-		#######################################################################
-
 
 		########## Input to Output (Input,Output, Shift, Submit) ###############
 
@@ -76,6 +90,9 @@ class Instacrypt:
 									height = 10, width = 65)
 		self.inputEnt.config(highlightbackground = "#074C0A")
 		self.inputEnt.grid(row = 3, column = 0, columnspan = 4, sticky = 'W', padx = 5, pady = 5)
+
+		self.inputEnt.insert(tk.INSERT, "Input goes here....")
+
 
 
 		self.shiftFrame = tk.LabelFrame(self.root, text = self.englishTrans[3])
@@ -95,23 +112,29 @@ class Instacrypt:
 		self.outputEnt.config(highlightbackground = "#074C0A")
 		self.outputEnt.grid(row = 5, column = 0, columnspan = 4, rowspan = 3, sticky = 'W', padx = 5, pady = 5)
 
-		#########################################################################
+
+
+		self.outputEnt.insert(tk.INSERT, "Output will go here...")
 
 
 		########################## Descriptions ####################################
 
 		self.algoDesc = tk.Text(self.root, background = "gray", foreground = "white",
 										height = 5, width = 50)
-		self.algoDesc.config(state = "disabled", highlightbackground = "#232423")
+		self.algoDesc.config(highlightbackground = "#232423")
 		self.algoDesc.grid(row = 0, column = 6, rowspan = 3)
 
 		self.codeDesc = tk.Text(self.root, background = "gray", foreground = "white",
 										height = 10, width = 50)
-		self.codeDesc.config(state = "disabled", highlightbackground = "#232423")
+		self.codeDesc.config(highlightbackground = "#232423")
 		self.codeDesc.grid(row = 3, column = 6)
 
-		###########################################################################
 
+		self.algoDesc.insert(tk.INSERT, self.adList[0])
+		self.codeDesc.insert(tk.INSERT, self.cdList[0])
+
+		self.algoDesc.config(state = "disabled")
+		self.codeDesc.config(state = "disabled")
 
 		###################### Import Export Buttons ##############################
 
@@ -125,11 +148,11 @@ class Instacrypt:
 		self.exportbtn.config(highlightbackground = "#232423")
 		self.exportbtn.grid(row = 5, column = 6)
 
-		self.fileEntry = tk.Entry(self.root)
+		self.fileEntry = tk.Text(self.root, height = 1, width = 40)
 		self.fileEntry.config(highlightbackground = "#232423")
 		self.fileEntry.grid(row = 6, column = 6, padx = 12, pady = 6)
 
-		############################################################################
+		self.fileEntry.insert(tk.INSERT, "Enter your file name here...")
 
 
 		############################# LOGO #########################################
@@ -137,12 +160,7 @@ class Instacrypt:
 		self.logo = tk.PhotoImage(file = "InstaCryptLogo.png")
 		self.logoImage = tk.Label(image = self.logo)
 		self.logoImage.config(background = "#232423")
-		self.logoImage.grid(row = 7, column = 6, sticky = "NW", padx = 12)
-		
-		##############################################################################
-
-
-		self.outputStr = ""
+		self.logoImage.grid(row = 7, column = 6, sticky = "N", padx = 12)
 
 
 		self.root.mainloop()
@@ -159,7 +177,7 @@ class Instacrypt:
 		inputStr =  self.inputEnt.get("1.0", tk.END)
 		outputStr = self.outputEnt.get("1.0", tk.END)
 
-		self.file.write(inputStr + "\n" + outputStr + "\n")
+		self.file.write(inputStr + "\n")
 
 	def importfnc(self):
 		self.fileName = self.fileEntry.get()
@@ -176,14 +194,16 @@ class Instacrypt:
 
 
 
+
+
+
+
 	########################### ENCRYPTION ALGORITMS ###################################
 	def asciiEncode(self):
 
 		inputStr = self.inputEnt.get("1.0", tk.END)
 		
 		for i in range(len(inputStr)):
-			
-			print(i)
 
 			if len(str(ord(inputStr[i]))) <= 2:
 				self.outputStr += "0"
@@ -197,10 +217,9 @@ class Instacrypt:
 		self.outputEnt.delete("1.0", tk.END)
 		self.outputEnt.update()
 
-		self.outputEnt.insert(tk.INSERT, self.outputStr[0:len(self.outputStr)-3])
+		self.outputEnt.insert(tk.INSERT, self.outputStr[0:len(self.outputStr)-4])
 
 
-		############################
 
 	def binaryEncode(self):
 
@@ -214,7 +233,6 @@ class Instacrypt:
 
 		self.outputEnt.insert(tk.INSERT, str[0:len(str) - 5])
 
-		##############################
 
 	def rotiEncode(self):
 		inputStr = self.inputEnt.get("1.0", tk.END)
@@ -233,7 +251,7 @@ class Instacrypt:
 
 
 
-		#################################
+
 
 	def binaryInversionEncode(self):
 
@@ -248,7 +266,7 @@ class Instacrypt:
 
 		self.outputEnt.insert(tk.INSERT, self.outputStr[5:len(self.outputStr)])
 
-	#################################################################################
+
 
 
 
@@ -265,24 +283,7 @@ class Instacrypt:
 
 		for i in range(len(inputStr)-1):
 
-			if i != 0:
-
-				if i != len(inputStr) - 6:
-					if inputStr[i] == " " and inputStr[i+5] == " ":
-
-						print("YEET")
-						inputList.append(inputStr[i+1:i+4])
-						print("test")
-				
-					else:
-						print("next" + str(i))
-				else:
-					inputList.append(inputStr[i+1:i+4])
-
-			else:
-				inputList.append(inputStr[i:i+3])
-
-		print(inputList)
+			inputList = inputStr.split()
 
 
 		#This is turning those into characters and putting them into words without spaces 
@@ -290,7 +291,6 @@ class Instacrypt:
 
 		for x in range(len(inputList)):
 			self.outputStr += chr(int(inputList[x]))
-			print("test 2")
 
 
 		self.outputEnt.delete("1.0", tk.END)
@@ -299,54 +299,141 @@ class Instacrypt:
 		self.outputEnt.insert(tk.INSERT, self.outputStr)
 
 
-		#########################
+
 
 	def binaryDecode(self):
 		
 		inputStr = self.inputEnt.get("1.0", tk.END)
 
-		self.outputStr = inputStr.decode('utf-8')
+		inputList = inputStr.split()
+
+		for i in range(len(inputList)):
+			inputList[i] = int(inputList[i])
+
+		self.decode(inputList)
+
 
 		self.outputEnt.delete("1.0", tk.END)
 		self.outputEnt.update()
 
 		self.outputEnt.insert(tk.INSERT, self.outputStr)
 
-		#########################
 
 	def rotiDecode(self):
 		inputStr = self.inputEnt.get("1.0", tk.END)
 		shift = int(self.shiftSpin.get())
 
-		for x in range(len(inputStr)-1):
+		for x in range(len(inputStr)):
 			self.outputStr += chr(int(ord(inputStr[x]) - shift))
-
 
 
 
 		self.outputEnt.delete("1.0", tk.END)
 		self.outputEnt.update()
 
-		self.outputEnt.insert(tk.INSERT, self.outputStr)
-
-		#############################
+		self.outputEnt.insert(tk.INSERT, self.outputStr[0:len(self.outputStr)-2])
 
 
 	def binaryInversionDecode(self):
-		print("binary inversion decode")
+		inputStr = self.inputEnt.get("1.0", tk.END)
+		inputStr = inputStr[::-1]
 
-	##################################################################################
+		inputList = inputStr.split()
+
+		for i in range(len(inputList)):
+			inputList[i] = int(inputList[i])
+
+		self.decode(inputList)
+
+		self.outputEnt.delete("1.0", tk.END)
+		self.outputEnt.update()
+
+		self.outputEnt.insert(tk.INSERT, self.outputStr)
+
+
+		
+
+
+
+
+
+	################################ BINARY LIBRARY ##################################
+	def decode(self,message):
+
+		dList = [
+
+				[1100001, "a"],		[1100010, "b"],
+				[1100011, "c"],		[1100100, "d"],
+				[1100101, "e"],		[1100110, "f"],
+				[1100111, "g"],		[1101000, "h"],
+				[1101001, "i"],		[1101010, "j"],
+				[1101011, "k"],		[1101100, "l"],
+				[1101101, "m"],		[1101110, "n"],
+				[1101111, "o"],		[1110000, "p"],
+				[1110001, "q"],		[1110010, "r"],
+				[1110011, "s"],		[1110100, "t"],
+				[1110101, "u"],		[1110110, "v"],
+				[1110111, "w"],		[1111000, "x"],
+				[1111001, "y"],		[1111010, "z"],
+				[1000001, 'A'], 	[1000010, 'B'], 
+				[1000011, 'C'], 	[1000100, 'D'], 
+				[1000101, 'E'],		[1000110, 'F'], 
+				[1000111, 'G'], 	[1001000, 'H'], 
+				[1001001, 'I'], 	[1001010, 'J'], 
+				[1001011, 'K'], 	[1001100, 'L'], 
+				[1001101, 'M'], 	[1001110, 'N'], 
+				[1001111, 'O'], 	[1010000, 'P'], 
+				[1010001, 'Q'], 	[1010010, 'R'], 
+				[1010011, 'S'], 	[1010100, 'T'], 
+				[1010101, 'U'], 	[1010110, 'V'], 
+				[1010111, 'W'], 	[1011000, 'X'], 
+				[1011001, 'Y'], 	[1011010, 'Z'],
+				[100001,  '!'],		[1000000, '@'],
+				[100011,  '#'],		[100100,  '$'],
+				[100101,  '%'],		[1011110, '^'], 
+				[100110,  '&'],		[101010,  '*'], 
+				[101000,  '('],		[101001,  ')'], 
+				[1011111, '_'],		[101011,  '+'], 
+				[1100000, '`'],		[110001,  '1'], 
+				[110010,  '2'],		[110011,  '3'], 
+				[110100,  '4'],		[110101,  '5'], 
+				[110110,  '6'],		[110111,  '7'], 
+				[111000,  '8'],		[111001,  '9'], 
+				[110000,  '0'],		[101101,  '-'], 
+				[111101,  '='],		[111011,  ';'], 
+				[111100,  '<'], 	[1111110, '~'],
+				[111110,  '>'],		[111111,  '?'],
+				[100000,  ' ']
+			]
+
+		self.outputStr = ""
+
+		for i in range(0,len(message),1):
+			for j in range(0, len(dList), 1): #loops through dlist
+				if dList[j][0] == message[i]:
+					self.outputStr = self.outputStr + dList[j][1]
+
 
 
 	########################## SUBMIT FUNCTION #######################################
 
 	def submitfnc(self):
 
+		self.outputEnt.delete("1.0", tk.END)
+
 		try:
+
+
+			self.outputEnt.delete("1.0", tk.END)
+
 			if self.actionRadioVar.get() == 1:
 
 				if self.algorithmVar.get() == "ASCII":
 					self.asciiEncode()
+
+					self.codeDesc.config(state = "enabled")
+					self.codeDesc.delete("1.0", tk.END)
+					self.codeDesc.insert(tk.INSERT, adList[1])
 
 				elif self.algorithmVar.get() == "Binary":
 					self.binaryEncode()
@@ -370,12 +457,16 @@ class Instacrypt:
 				elif self.algorithmVar.get() == "Binary Inversion":
 					self.binaryInversionDecode()
 
-		except ValueError:
+
+		except ValueError: #This is for when there are 
+						   #non-alpha chars in the input (Mandarin, Arabic,
+						   #letters in ASCII or Binary decoding etc.)
 
 			self.outputEnt.delete("1.0", tk.END)
 			self.outputEnt.update()
 
 			self.outputEnt.insert(tk.INSERT, "INVALID")
+
 
 		###### Language Change #####
 
@@ -406,11 +497,12 @@ class Instacrypt:
 			self.importbtn.config(text   = self.spanishTrans[5])
 			self.exportbtn.config(text   = self.spanishTrans[6])
 
+			#Unfortunately could not find a better way to do this.
 
-		############################
 
-		
-		self.outputStr = ""
+
+		#Just a Reset
+		self.outputStr = " "
 
 	
 
@@ -422,6 +514,7 @@ class Instacrypt:
 
 
 mainPage = Instacrypt()
+
 
 
 

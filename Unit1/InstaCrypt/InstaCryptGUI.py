@@ -1,6 +1,7 @@
 # Created by Nima Bidari December 6 2018
 
 import tkinter as tk
+import webbrowser
 
 
 class Instacrypt:
@@ -12,19 +13,29 @@ class Instacrypt:
 
 		####### Language VARS ########
 
-		self.englishTrans = ["Action", "Encode", "Decode", "Shift", "Submit","Import to Text File", "Export to Text File"]
-		self.frenchTrans  = ["Action", "Encoder", "Décoder", "Décalage", "Submitter","Importer Dans Un Fichier Texte", "Exporter Dans Un Fichier Texte"]
-		self.spanishTrans = ["Acción", "Codificar", "Descodificar", "El Cambio", "Enviar", "Importar Desde Archivo de Texto", "Exportar a Archivo de Texto"]
+		self.englishTrans = ["Action", "Encode", "Decode", "Shift", "Submit","Import to Text File", "Export to Text File", "Give us feedback :)", "Our Website!"]
+		self.frenchTrans  = ["Action", "Encoder", "Décoder", "Décalage", "Submitter","Importer Dans Un Fichier Texte", "Exporter Dans Un Fichier Texte", "Donnez-nous vos commentaires :)", "Notre Site Web!"]
+		self.spanishTrans = ["Acción", "Codificar", "Descodificar", "El Cambio", "Enviar", "Importar Desde Archivo de Texto", "Exportar a Archivo de Texto", "Danos su opinión :)", "Nuestra Página Web!"]
 
 		####### DESC VARS #############
 
-		self.adList  = ["Small description of the algorithms...",
-						""
+		self.adList  = ["Description of Algorithsm...",
+						"ASCII is the language of keyboards worldwide. It  qualitates each letter on your keyboard as 3 numbe-rs. If it is two, like 95, it would be 095. ASCII  is the hexadecimal form of the binary. (See binary for more details)",
+						"Binary is a series of 1’s and 0’s 1’s represent onand 0’s represent off. This is useful in  computers as the way the processor works is to run many hund-reds of millions ons and offs every second in orderto complete a function. Binary is actually the hex-adecimal form of the ASCII as well. The most  basic form of everything  that  happens in a computer is binary.",
+						"ROTI is a basic form of encryption that best rese-mbles something that may be happening  in  reality.Commonly known as the shift cipher, ROTI essentiallyshifts everything down a certain number. For examp-le, with a shift of 2, A  becomes  C. It is frequentpractice to move Z back to A, however that would me-an that the shift does not account for commas etc. -In order to keep it as realistic to how other encry-ption algorithms would work, this is the case. Thir-d-Party Encryption Algorithms have a key,  which  isassigned to the user (you). This key is much  like  the shift. When the key is used, the files will turnback to how they were originally. This happens pass-ively with all folders on a computer (i.e. admin fi-les aren’t aloud to be opened on a library computer ), however TPE’s take it a step further.",
+						"Binary inversion is an interesting  one.  Althoughthe syntax looks just like binary, it is essential-ly the binary code mirrored. The same way abc wouldbecome cba. This is more  like a  code  that  wouldhave been used in WWII. A letter would be written, which seems totally normal, however in that letter there is a secret embedded. Here, if you try to de-code the binary, it would look like a corrupted fi-le, however if you invert it and then decode, then it becomes completely normal."
 
 		]
 		
 		self.cdList  = ["Small description of code behind it, as well as the restrictions...",
-						""
+						"ASCII Encode",
+						"Binary Encode CHANGE TEXT",
+						"ROTI Encode",
+						"Binary Inversion Encode",
+						"ASCII Decode THIS IS THE CODE",
+						"Binary Decode",
+						"ROTI Decode",
+						"BINARY inversion decode"
 
 		]
 
@@ -32,14 +43,11 @@ class Instacrypt:
 		
 		self.fileName = ""
 
-
 		######################## ROOT ############################
 	
 		self.root = tk.Tk()
 		self.root.title("InstaCrypt")
 		self.root.configure(background = "#DADFDF")
-
-		###########################################################
 
 
 		##################### TKINTER VARS ########################
@@ -110,7 +118,7 @@ class Instacrypt:
 		self.outputEnt = tk.Text(self.root, background = "black", foreground = "lime",
 									height = 10, width = 65)
 		self.outputEnt.config(highlightbackground = "#074C0A")
-		self.outputEnt.grid(row = 5, column = 0, columnspan = 4, rowspan = 3, sticky = 'W', padx = 5, pady = 5)
+		self.outputEnt.grid(row = 5, column = 0, columnspan = 4, rowspan = 7, sticky = 'NESW', padx = 5, pady = 5)
 
 
 
@@ -155,12 +163,22 @@ class Instacrypt:
 		self.fileEntry.insert(tk.INSERT, "Enter your file name here...")
 
 
+		######################## WEBSITE REDIRECTS #################################
+
+		self.feedbackSite = tk.Button(self.root, text = self.englishTrans[7], command = self.feedbackWebOpener, height = 2)
+		self.feedbackSite.config(highlightbackground = "#232423")
+		self.feedbackSite.grid(row = 7, column = 6, padx = 12, pady = 6, sticky = "EW")
+
+		self.webSite = tk.Button(self.root, text = self.englishTrans[8], command = self.websiteWebOpener, height = 2)
+		self.webSite.config(highlightbackground = "#232423")
+		self.webSite.grid(row = 8, column = 6, padx = 12, pady = 6, sticky = "EW")
+
 		############################# LOGO #########################################
 		
 		self.logo = tk.PhotoImage(file = "InstaCryptLogo.png")
 		self.logoImage = tk.Label(image = self.logo)
 		self.logoImage.config(background = "#232423")
-		self.logoImage.grid(row = 7, column = 6, sticky = "N", padx = 12)
+		self.logoImage.grid(row = 9, column = 6, sticky = "N", padx = 12)
 
 
 		self.root.mainloop()
@@ -170,19 +188,22 @@ class Instacrypt:
 	###################### IMPORT/EXPORT #####################
 
 	def exportfnc(self):
-		self.fileName = self.fileEntry.get()
+		self.fileName = self.fileEntry.get("1.0", tk.END)
+		print(self.fileName)
 
-		self.file = open(self.fileName + ".txt", "a")
+		self.file = open(self.fileName + ".txt", "a") #This way the person doesn't need to know to write down a suffix.
+													  #Maybe in the future the file type can be specified
 
 		inputStr =  self.inputEnt.get("1.0", tk.END)
 		outputStr = self.outputEnt.get("1.0", tk.END)
 
-		self.file.write(inputStr + "\n")
+		self.file.write(outputStr + "\n") 
 
 	def importfnc(self):
-		self.fileName = self.fileEntry.get()
+		self.fileName = self.fileEntry.get("1.0", tk.END)
 
-		self.file = open(self.fileName + ".txt", "r")
+		self.file = open(self.fileName + ".txt", "r") #This way the person doesn't need to know to write down a suffix.
+													  #Maybe in the future the file type can be specified
 
 		if self.file.mode == "r":
 			self.contents = self.file.read()
@@ -217,7 +238,8 @@ class Instacrypt:
 		self.outputEnt.delete("1.0", tk.END)
 		self.outputEnt.update()
 
-		self.outputEnt.insert(tk.INSERT, self.outputStr[0:len(self.outputStr)-4])
+		self.outputEnt.insert(tk.INSERT, self.outputStr[0:len(self.outputStr)-4]) #This is due to a bug, no fix found, so
+																				  #instead just removed it from the output.
 
 
 
@@ -225,13 +247,14 @@ class Instacrypt:
 
 		inputStr = self.inputEnt.get("1.0", tk.END)
 
-		str = ' '.join(format(ord(x), 'b') for x in inputStr)
-		
+		str = ' '.join(format(ord(x), 'b') for x in inputStr) #Simple .format() function in cooperation with .join()
+															  #This way it can be done in one line, not really 
+															  #necessary, just more efficient
 
 		self.outputEnt.delete("1.0", tk.END)
 		self.outputEnt.update()
 
-		self.outputEnt.insert(tk.INSERT, str[0:len(str) - 5])
+		self.outputEnt.insert(tk.INSERT, str[0:len(str) - 5]) #Bug fix
 
 
 	def rotiEncode(self):
@@ -240,7 +263,8 @@ class Instacrypt:
 
 
 		for x in range(len(inputStr)-1):
-			self.outputStr += chr(int(ord(inputStr[x]) + shift))
+			self.outputStr += chr(int(ord(inputStr[x]) + shift)) #Simple two line solution in cooperation with ASCII
+																 #This means that I don't have to use a library.
 
 
 
@@ -257,8 +281,8 @@ class Instacrypt:
 
 		inputStr = self.inputEnt.get("1.0", tk.END)
 
-		str = ' '.join(format(ord(x), 'b') for x in inputStr)
-		self.outputStr = str[::-1]
+		str = ' '.join(format(ord(x), 'b') for x in inputStr) #
+		self.outputStr = str[::-1] 							  #
 
 
 		self.outputEnt.delete("1.0", tk.END)
@@ -354,7 +378,12 @@ class Instacrypt:
 		
 
 
+	############ WEB BROWSER ############
 
+	def feedbackWebOpener(self):
+		webbrowser.open("https://sites.google.com/ucc.on.ca/year9designcoding-nbidari/unit-1/evaluating/feedback?authuser=1")
+	def websiteWebOpener(self):
+		webbrowser.open("https://sites.google.com/ucc.on.ca/year9designcoding-nbidari/home?authuser=1")
 
 
 	################################ BINARY LIBRARY ##################################
@@ -419,6 +448,9 @@ class Instacrypt:
 
 	def submitfnc(self):
 
+		adOutput = ""
+		cdOutput = ""
+
 		self.outputEnt.delete("1.0", tk.END)
 
 		try:
@@ -431,36 +463,60 @@ class Instacrypt:
 				if self.algorithmVar.get() == "ASCII":
 					self.asciiEncode()
 
-					self.codeDesc.config(state = "enabled")
-					self.codeDesc.delete("1.0", tk.END)
-					self.codeDesc.insert(tk.INSERT, adList[1])
+					adOutput = self.adList[1]
+					cdOutput = self.cdList[1]
 
 				elif self.algorithmVar.get() == "Binary":
 					self.binaryEncode()
 
+					adOutput = self.adList[2]
+					cdOutput = self.cdList[2]
+
 				elif self.algorithmVar.get() == "ROTI":
 					self.rotiEncode()
 
+					adOutput = self.adList[3]
+					cdOutput = self.cdList[3]
+
 				elif self.algorithmVar.get() == "Binary Inversion":
 					self.binaryInversionEncode()
+
+					adOutput = self.adList[4]
+					cdOutput = self.cdList[4]
 			else:
 
 				if self.algorithmVar.get() == "ASCII":
 					self.asciiDecode()
 
+					adOutput = self.adList[1]
+					cdOutput = self.cdList[5]
+
 				elif self.algorithmVar.get() == "Binary":
 					self.binaryDecode()
+
+					adOutput = self.adList[2]
+					cdOutput = self.cdList[6]
 
 				elif self.algorithmVar.get() == "ROTI":
 					self.rotiDecode()
 
+					adOutput = self.adList[3]
+					cdOutput = self.cdList[7]
+
 				elif self.algorithmVar.get() == "Binary Inversion":
 					self.binaryInversionDecode()
+
+					adOutput = self.adList[4]
+					cdOutput = self.cdList[8]
 
 
 		except ValueError: #This is for when there are 
 						   #non-alpha chars in the input (Mandarin, Arabic,
 						   #letters in ASCII or Binary decoding etc.)
+
+			adOutput = "INVALID INPUT"
+			cdOutput = "INVALID INPUT"
+
 
 			self.outputEnt.delete("1.0", tk.END)
 			self.outputEnt.update()
@@ -478,6 +534,8 @@ class Instacrypt:
 			self.submitbtn.config(text   = self.englishTrans[4])
 			self.importbtn.config(text   = self.englishTrans[5])
 			self.exportbtn.config(text   = self.englishTrans[6])
+			self.feedbackSite.config(text= self.englishTrans[7])
+			self.webSite.config(text     = self.englishTrans[8])
 
 		elif self.languageVar.get() == "Francais":
 			self.actionFrame.config(text = self.frenchTrans[0])
@@ -487,6 +545,8 @@ class Instacrypt:
 			self.submitbtn.config(text   = self.frenchTrans[4])
 			self.importbtn.config(text   = self.frenchTrans[5])
 			self.exportbtn.config(text   = self.frenchTrans[6])
+			self.feedbackSite.config(text= self.frenchTrans[7])
+			self.webSite.config(text     = self.frenchTrans[8])
 
 		elif self.languageVar.get() == "Espanol":
 			self.actionFrame.config(text = self.spanishTrans[0])
@@ -496,18 +556,33 @@ class Instacrypt:
 			self.submitbtn.config(text   = self.spanishTrans[4])
 			self.importbtn.config(text   = self.spanishTrans[5])
 			self.exportbtn.config(text   = self.spanishTrans[6])
+			self.feedbackSite.config(text= self.spanishTrans[7])
+			self.webSite.config(text     = self.spanishTrans[8])
 
 			#Unfortunately could not find a better way to do this.
 
 
 
 		#Just a Reset
-		self.outputStr = " "
+		self.outputStr = ""
 
-	
 
-	#############################################################################
+		##### DESC INSERTS #####
+		self.algoDesc.config(state = "normal")
+		self.codeDesc.config(state = "normal")
 
+		self.algoDesc.delete("1.0", tk.END)
+		self.algoDesc.update()
+
+		self.algoDesc.insert(tk.INSERT, adOutput)
+
+		self.codeDesc.delete("1.0", tk.END)
+		self.codeDesc.update()
+
+		self.codeDesc.insert(tk.INSERT, cdOutput)
+
+		self.algoDesc.config(state = "disabled")
+		self.codeDesc.config(state = "disabled")
 
 
 

@@ -6,9 +6,16 @@
 
 import requests
 
-requests.post("https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyBkbidNavhMbjzAkd63OXEEyweWgHCviOE", allow_redirects = False, data = {
+i = 0
 
-	'email': 'nima.bidari@ucc.on.ca',
-	'password': 'helloibrahim'
+while i < 40:
+	requests.post("https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyBkbidNavhMbjzAkd63OXEEyweWgHCviOE", allow_redirects = False, data = {
 
-	})
+		'email': 'nima.bidari@ucc.on.ca',
+		'password': 'helloibrahim'
+
+		})
+
+	i = i+1
+
+	print("Get Trolled Ib!")

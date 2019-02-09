@@ -1,8 +1,7 @@
-a = 0
-b = 0
 
-x = 0
-y = 0
+result = [0,0]
+pointer = 0
+
 sevenSaid = False
 
 
@@ -10,20 +9,20 @@ sevenSaid = False
 while sevenSaid == False:
 	instruction = input("")
 
-
-	if instruction[2] == "A":
-		a = x
-		b = y
-	else:
-		a = y
-		b = x
+	
+	
 
 	if instruction[0] == "7":
 		sevenSaid = True
 	else:
 
+		if (instruction[2] == "A"):
+			pointer = 0;
+		else:
+			pointer = 1;
+
 		if instruction[0] == "1":
-			x = instruction[4]
+			result[pointer] = instruction[4]
 		elif instruction[0] == "2":
 			print(x)
 		else:
